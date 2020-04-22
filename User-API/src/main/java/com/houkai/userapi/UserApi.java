@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author houkai
  *
  */
-@RequestMapping("/User")
+//@RequestMapping("/User")
 public interface UserApi {
 
-    @GetMapping("/isAlive")
+    @GetMapping("/User/isAlive")
     public String isAlive();
-    @GetMapping("/getById")
+    @GetMapping("/User/getById")
     public String getById(Integer id);
-    @PostMapping("/postPserson")
+    @PostMapping("/User/postPserson")
     public Person postPserson(@RequestBody Person person);
 }
