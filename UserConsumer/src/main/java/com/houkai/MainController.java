@@ -1,7 +1,9 @@
 package com.houkai;
 
 import com.houkai.userapi.Person;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,10 +15,34 @@ import java.util.Map;
 public class MainController {
     @Autowired
     ConsumerApi api;
+    @Autowired
+    RestService restService;
+
+    @Value("${server.port}")
+    String port;
+
     @GetMapping("/alive")
     public String alive() {
 
-        return api.isAlive();
+        return "User Consumer:" + port + "->>>>"+api.isAlive();
+    }
+
+    @GetMapping("/alive2")
+    @HystrixCommand(defaultFallback = "back")
+    public String alive2() {
+        /**
+         * URL 不能变
+         *
+         * jar
+         * 文档
+         */
+
+        return "Consumer:" + port + "->>>>" + restService.alive();
+    }
+
+    public String back() {
+
+        return "呵呵,熔断了";
     }
     /**
      *

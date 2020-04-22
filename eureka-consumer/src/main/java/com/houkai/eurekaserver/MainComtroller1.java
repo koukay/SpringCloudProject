@@ -1,9 +1,11 @@
 package com.houkai.eurekaserver;
 
+import com.houkai.ConsumerApi;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -26,7 +28,14 @@ public class MainComtroller1 {
     LoadBalancerClient lb;
     @Autowired
     private RestTemplate restTemplate;
+    @Value("${server.port}")
+    String port;
 
+    @GetMapping("/alive")
+    public String alive() {
+
+        return "Eureka Consumer:" + port + "->>>>";
+    }
     @GetMapping("/getHi")
     public String getHi(){
         return "Hi,im 90";
