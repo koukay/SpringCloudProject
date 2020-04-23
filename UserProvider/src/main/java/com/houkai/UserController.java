@@ -16,8 +16,8 @@ public class UserController implements UserApi {
     @Value("${server.port}")
     String port;
     private AtomicInteger count = new AtomicInteger();
-    @GetMapping("/alive")
-    public String alive(){
+    @Override
+    public String isAlive(){
         try {
             System.out.println("准备睡");
 
@@ -26,14 +26,12 @@ public class UserController implements UserApi {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         int i = count.getAndIncrement();
         System.out.println(port + " 好的 ====第：" + i + "次调用");
         return "Provider:port:" + port;
     }
-
-    @Override
-    public String isAlive() {
+    @GetMapping("/alive")
+    public String alive() {
         return "haha";
     }
 

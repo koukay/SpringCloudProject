@@ -21,6 +21,13 @@ public class MainController {
     @Value("${server.port}")
     String port;
 
+    /**
+     * http://localhost:91/alive
+     * 服务请求过来会调用 ConsumerApi的isAlive方法
+     * @FeignClient(name = "user-provider",fallbackFactory = UserProviderBackFactory.class) FeignClient进行远程服务调用,
+     * 如果发生异常则在fallbackFactory中进行处理,UserProviderBackFactory 实现FallbackFactory,重写create方法,拿到异常信息和响应信息
+     * @return
+     */
     @GetMapping("/alive")
     public String alive() {
 

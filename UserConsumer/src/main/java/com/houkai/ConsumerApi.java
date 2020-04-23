@@ -10,6 +10,7 @@ import java.util.Map;
 /*
  * 不结合eureka，就是自定义一个client名字。就用url属性指定 服务器列表。url=“http://ip:port/”
  */
+//@FeignClient(name = "user-provider",fallback = UserProviderBack.class)
 @FeignClient(name = "user-provider",fallbackFactory = UserProviderBackFactory.class)
 public interface ConsumerApi extends UserApi {
 

@@ -3,9 +3,11 @@ package com.houkai;
 import com.houkai.userapi.Person;
 import feign.FeignException;
 import feign.hystrix.FallbackFactory;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
-
+@Component
 public class UserProviderBackFactory implements FallbackFactory<ConsumerApi> {
     @Override
     public ConsumerApi create(Throwable cause) {
@@ -33,6 +35,8 @@ public class UserProviderBackFactory implements FallbackFactory<ConsumerApi> {
             @Override
             public String isAlive() {
                 System.out.println(cause);
+                cause.printStackTrace();
+                System.out.println(ToStringBuilder.reflectionToString(cause));
                 if(cause instanceof FeignException.InternalServerError) {
 
                     return "远程服务器 500" + cause.getLocalizedMessage();
