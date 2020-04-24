@@ -30,7 +30,11 @@ public class MainController {
      */
     @GetMapping("/alive")
     public String alive() {
-
+        //远程服务调用,hystrix配置有超时机制和重试次数
+//        #业务逻辑超时时间(ms)
+//        ribbon.ReadTimeout=2000
+//        #同一台实例最大重试次数,不包括首次调用
+//        ribbon.MaxAutoRetries=3
         return "User Consumer:" + port + "->>>>"+api.isAlive();
     }
 

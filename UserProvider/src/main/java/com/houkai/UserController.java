@@ -21,7 +21,8 @@ public class UserController implements UserApi {
         try {
             System.out.println("准备睡");
 
-            Thread.sleep(500);
+            Thread.sleep(400);
+//            Thread.sleep(4000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
